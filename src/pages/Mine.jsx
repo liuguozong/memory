@@ -13,7 +13,6 @@ const Card = ({ count, onHandle }) => {
       setInterval(() => {
         time += 1
         setA(calculate(time))
-        console.log(a)
       }, 1000)
     )
   }
@@ -22,21 +21,22 @@ const Card = ({ count, onHandle }) => {
     clearInterval(timing)
   }
   function handle(evt) {
-    const e = document.getElementById(evt.target.id)
+    const id = evt.target.id
+    const e = document.getElementById(id)
     const name = e.getAttribute('class')
     const img = e.getAttribute('name')
     if (!(name === 'card open match')) {
       if (judge.length === 0) {
         setIndxe(index + 1)
         behind(e, img, index)
-        setJudge((v) => [{ ...v, id: e, name: img }])
-      } else if (!(index === 2)) {
+        setJudge((v) => [{ ...v, id: id, name: img, key: e }])
+      } else if (!(index === 2) && !(id === judge[0].id)) {
         setIndxe(index + 1)
         console.log(!(index === 2))
         behind(e, img, index)
         if (judge[0].name === img) {
           setTimeout(() => {
-            match(judge[0].id, all)
+            match(judge[0].key, all)
             match(e, all)
             setIndxe(0)
             setJudge([])
@@ -47,7 +47,7 @@ const Card = ({ count, onHandle }) => {
           console.log('相同')
         } else {
           setTimeout(() => {
-            front(judge[0].id, all)
+            front(judge[0].key, all)
             front(e, all)
             setIndxe(0)
             setJudge([])

@@ -1,6 +1,5 @@
     // 计算时间
     const calculate = function count(timE) {
-        console.log(timE, '传的时间')
         const m = leftpad(Math.floor((timE / 60) % 60), 2, 0)
         const s = leftpad(Math.floor(timE % 60), 2, 0)
         return timE = m + `:` + s
